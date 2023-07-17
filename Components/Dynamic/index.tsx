@@ -1,25 +1,42 @@
 import { useEffect, useRef, useState } from 'react';
 import React = require('react');
-import DynamicComponent from './DynamicComponent';
+const DynamicComponent = React.lazy(() => import('./DynamicComponent'));
 
 export const Dynamic = () => {
   const [showComponent, setShowComponent] = useState(false);
   const targetRef = useRef(null);
 
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const targetElement = targetRef.current;
+  //     if (targetElement) {
+  // const { top } = targetElement.getBoundingClientRect();
+  // const isInView = top <= window.innerHeight;
+  // setShowComponent(isInView);
+  //     }
+  //   };
+
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
+
   useEffect(() => {
-    const handleScroll = () => {
-      const targetElement = targetRef.current;
-      if (targetElement) {
+    const targetElement = targetRef.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
         const { top } = targetElement.getBoundingClientRect();
         const isInView = top <= window.innerHeight;
+        console.log('Showing', isInView);
         setShowComponent(isInView);
+      },
+      {
+        rootMargin: '-300px',
       }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    );
+    observer.observe(targetElement);
+    return () => observer.disconnect();
   }, []);
 
   return (
