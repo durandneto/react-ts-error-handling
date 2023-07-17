@@ -41,13 +41,11 @@ export const Dynamic = () => {
 
   return (
     <div>
-      <div style={{ height: '2000px' }}>Scroll down...</div>
+      {/* <div style={{ height: '2000px' }}>Scroll down...</div> */}
       <div ref={targetRef}>
-        {showComponent && (
-          <React.Suspense fallback={<div>Loading...</div>}>
-            <DynamicComponent />
-          </React.Suspense>
-        )}
+        <React.Suspense fallback={<div>Loading...</div>}>
+          {showComponent && <DynamicComponent />}
+        </React.Suspense>
       </div>
     </div>
   );
