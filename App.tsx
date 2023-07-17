@@ -41,18 +41,13 @@ export default function App() {
 
       <Dynamic DynamicComponent={DynamicComponentText} />
 
-      <React.Suspense fallback={UserLoadingComponent({ code: 12 })}>
-        <Dynamic DynamicComponent={DynamicComponent} />
-      </React.Suspense>
-      <React.Suspense fallback={UserLoadingComponent({ code: 12 })}>
-        <Dynamic DynamicComponent={DynamicComponent} />
-      </React.Suspense>
-      <React.Suspense fallback={UserLoadingComponent({ code: 12 })}>
-        <Dynamic DynamicComponent={DynamicComponent} />
-      </React.Suspense>
-      <React.Suspense fallback={UserLoadingComponent({ code: 12 })}>
-        <Dynamic DynamicComponent={DynamicComponent} />
-      </React.Suspense>
+      <Dynamic DynamicComponent={DynamicComponent} />
+      <Dynamic DynamicComponent={DynamicComponent} />
+      <Dynamic DynamicComponent={DynamicComponent} />
+      <Dynamic DynamicComponent={DynamicComponent} />
+      <Dynamic DynamicComponent={DynamicComponent} />
+      <Dynamic DynamicComponent={DynamicComponent} />
+      <Dynamic DynamicComponent={DynamicComponent} />
     </div>
   );
 }

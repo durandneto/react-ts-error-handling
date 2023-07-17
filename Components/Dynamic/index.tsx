@@ -8,10 +8,14 @@ export const Dynamic = ({ DynamicComponent }) => {
 
   useEffect(() => {
     const targetElement = targetRef.current;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
+        const { top, bottom } = targetElement.getBoundingClientRect();
+        const isInView = top <= window.innerHeight;
+        console.log(top, bottom);
         setShowComponent(true);
-        observer.disconnect();
+        // observer.disconnect();
       },
       {
         rootMargin: '-300px',
