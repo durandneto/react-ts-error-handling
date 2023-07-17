@@ -13,7 +13,7 @@ export const Dynamic = ({ DynamicComponent }) => {
       ([entry]) => {
         const { top, bottom } = targetElement.getBoundingClientRect();
         const isInView = top <= window.innerHeight;
-        console.group(bottom - top);
+        console.table(bottom - top);
         setShowComponent(isInView);
         // observer.disconnect();
       },
