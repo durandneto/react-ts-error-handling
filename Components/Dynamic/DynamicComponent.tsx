@@ -1,8 +1,6 @@
 import React = require('react');
 
 const DynamicComponent = () => {
-  // ... component logic ...
-
   // React.startTransition(() => {
   //   Array.from(Array(100 * 100 * 100 * 100).keys()).forEach((i) => i);
   // });

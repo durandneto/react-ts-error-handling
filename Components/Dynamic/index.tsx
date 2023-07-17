@@ -5,6 +5,8 @@ import React = require('react');
 export const Dynamic = ({ DynamicComponent }) => {
   const [showComponent, setShowComponent] = useState(false);
   const targetRef = useRef(null);
+  const targetWdithRef = useRef(null);
+  console.log('render');
 
   // useEffect(() => {
   //   const handleScroll = () => {
@@ -24,13 +26,14 @@ export const Dynamic = ({ DynamicComponent }) => {
 
   useEffect(() => {
     const targetElement = targetRef.current;
+    const targetWElement = targetWdithRef.current;
+    targetWElement.style.height = 0;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        console.log(entry);
         const { top } = targetElement.getBoundingClientRect();
         const isInView = top <= window.innerHeight;
         console.log('Showing', isInView);
-        setShowComponent(true);
+        setShowComponent(isInView);
       },
       {
         rootMargin: '-300px',
@@ -42,7 +45,9 @@ export const Dynamic = ({ DynamicComponent }) => {
 
   return (
     <div>
-      {/* <div style={{ height: '2000px' }}>Scroll down...</div> */}
+      <div ref={targetWdithRef} style={{ height: '100vh' }}>
+        Scroll down...
+      </div>
       <div ref={targetRef}>
         {showComponent && (
           <React.Suspense fallback={<div>Loading...</div>}>
@@ -54,4 +59,4 @@ export const Dynamic = ({ DynamicComponent }) => {
   );
 };
 
-export default Dynamic;
+export default React.memo(Dynamic);
