@@ -6,7 +6,11 @@ import { AppErrorType } from './Error/AppError';
 import ErrorBoundaries from './Components/ErrorBoundaries';
 import './style.css';
 import UseComponent from './Hooks/UseComponent';
-import { Dynamic } from './Components/Dynamic';
+// import { Dynamic } from './Components/Dynamic';
+const DynamicComponent = React.lazy(() =>
+  import('./Components/Dynamic/DynamicComponent')
+);
+const Dynamic = React.lazy(() => import('./Components/Dynamic'));
 
 const textA = 'aab';
 const textB = 'abb';
@@ -33,7 +37,11 @@ export default function App() {
           <UserComponent />
         </React.Suspense>
       </ErrorBoundaries>
-      <Dynamic />
+      <Dynamic DynamicComponent={DynamicComponent} />
+      <Dynamic DynamicComponent={DynamicComponent} />
+      <Dynamic DynamicComponent={DynamicComponent} />
+      <Dynamic DynamicComponent={DynamicComponent} />
+      <Dynamic DynamicComponent={DynamicComponent} />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import React = require('react');
-const DynamicComponent = React.lazy(() => import('./DynamicComponent'));
+// const DynamicComponent = React.lazy(() => import('./DynamicComponent'));
 
-export const Dynamic = () => {
+export const Dynamic = ({ DynamicComponent }) => {
   const [showComponent, setShowComponent] = useState(false);
   const targetRef = useRef(null);
 
@@ -26,10 +26,11 @@ export const Dynamic = () => {
     const targetElement = targetRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
+        console.log(entry);
         const { top } = targetElement.getBoundingClientRect();
         const isInView = top <= window.innerHeight;
         console.log('Showing', isInView);
-        setShowComponent(isInView);
+        setShowComponent(true);
       },
       {
         rootMargin: '-300px',
@@ -43,10 +44,14 @@ export const Dynamic = () => {
     <div>
       {/* <div style={{ height: '2000px' }}>Scroll down...</div> */}
       <div ref={targetRef}>
-        <React.Suspense fallback={<div>Loading...</div>}>
-          {showComponent && <DynamicComponent />}
-        </React.Suspense>
+        {showComponent && (
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <DynamicComponent />
+          </React.Suspense>
+        )}
       </div>
     </div>
   );
 };
+
+export default Dynamic;
