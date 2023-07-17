@@ -29,14 +29,12 @@ export const Dynamic = ({ DynamicComponent, data }) => {
   }, []);
 
   return (
-    <div>
-      <div ref={targetRef}>
-        {showComponent && (
-          <React.Suspense fallback={<div>Loading...</div>}>
-            <DynamicComponent {...data} />
-          </React.Suspense>
-        )}
-      </div>
+    <div ref={targetRef}>
+      {showComponent && (
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <DynamicComponent {...data} />
+        </React.Suspense>
+      )}
     </div>
   );
 };
