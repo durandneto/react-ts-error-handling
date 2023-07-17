@@ -38,11 +38,21 @@ export default function App() {
           <UserComponent />
         </React.Suspense>
       </ErrorBoundaries>
+
       <Dynamic DynamicComponent={DynamicComponentText} />
-      <Dynamic DynamicComponent={DynamicComponent} />
-      <Dynamic DynamicComponent={DynamicComponent} />
-      <Dynamic DynamicComponent={DynamicComponent} />
-      <Dynamic DynamicComponent={DynamicComponent} />
+
+      <React.Suspense fallback={UserLoadingComponent({ code: 12 })}>
+        <Dynamic DynamicComponent={DynamicComponent} />
+      </React.Suspense>
+      <React.Suspense fallback={UserLoadingComponent({ code: 12 })}>
+        <Dynamic DynamicComponent={DynamicComponent} />
+      </React.Suspense>
+      <React.Suspense fallback={UserLoadingComponent({ code: 12 })}>
+        <Dynamic DynamicComponent={DynamicComponent} />
+      </React.Suspense>
+      <React.Suspense fallback={UserLoadingComponent({ code: 12 })}>
+        <Dynamic DynamicComponent={DynamicComponent} />
+      </React.Suspense>
     </div>
   );
 }
