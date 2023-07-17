@@ -6,6 +6,7 @@ import { AppErrorType } from './Error/AppError';
 import ErrorBoundaries from './Components/ErrorBoundaries';
 import './style.css';
 import UseComponent from './Hooks/UseComponent';
+import { Dynamic } from './Components/Dynamic';
 
 const textA = 'aab';
 const textB = 'abb';
@@ -32,7 +33,7 @@ export default function App() {
           <UserComponent />
         </React.Suspense>
       </ErrorBoundaries>
-      <UserComponent error />
+      <Dynamic />
     </div>
   );
 }
