@@ -5,6 +5,7 @@ import React = require('react');
 export const Dynamic = ({ DynamicComponent }) => {
   const [showComponent, setShowComponent] = useState(false);
   const targetRef = useRef(null);
+  const heightRef = useRef(false);
 
   useEffect(() => {
     const targetElement = targetRef.current;
@@ -13,9 +14,11 @@ export const Dynamic = ({ DynamicComponent }) => {
       ([entry]) => {
         const { top, bottom } = targetElement.getBoundingClientRect();
         const isInView = top <= window.innerHeight;
-        console.table(bottom - top);
+        heightRef.current = bottom - top > 0;
+        if (isInView && heightRef.current) {
+          targetElement.style.height = `${bottom - top}px`;
+        }
         setShowComponent(isInView);
-        // observer.disconnect();
       },
       {
         rootMargin: '-300px',
