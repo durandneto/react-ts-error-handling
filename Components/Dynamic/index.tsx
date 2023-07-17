@@ -16,13 +16,14 @@ export const Dynamic = ({ DynamicComponent, data }) => {
         const { top, bottom } = targetElement.getBoundingClientRect();
         const isInView = top <= window.innerHeight;
         heightRef.current = bottom - top > 0;
-        if (isInView && heightRef.current) {
+        console.log(heightRef.current, bottom - top);
+        if (heightRef.current) {
           targetElement.style.height = `${bottom - top}px`;
         }
         setShowComponent(isInView);
       },
       {
-        rootMargin: '-300px',
+        rootMargin: '-100px',
       }
     );
     observer.observe(targetElement);
@@ -32,9 +33,9 @@ export const Dynamic = ({ DynamicComponent, data }) => {
   return (
     <div ref={targetRef}>
       {showComponent && (
-        <ErrorBoundaries>
+        <React.Suspense>
           <DynamicComponent {...data} />
-        </ErrorBoundaries>
+        </React.Suspense>
       )}
     </div>
   );
