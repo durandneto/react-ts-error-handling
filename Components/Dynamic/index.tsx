@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import React = require('react');
-import ErrorBoundaries from '../../Components/ErrorBoundaries';
-// const DynamicComponent = React.lazy(() => import('./DynamicComponent'));
 
 export const Dynamic = ({ DynamicComponent, data }) => {
   const [showComponent, setShowComponent] = useState(false);
