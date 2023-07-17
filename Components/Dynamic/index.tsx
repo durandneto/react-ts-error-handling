@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import React = require('react');
 // const DynamicComponent = React.lazy(() => import('./DynamicComponent'));
 
-export const Dynamic = ({ DynamicComponent }) => {
+export const Dynamic = ({ DynamicComponent, data }) => {
   const [showComponent, setShowComponent] = useState(false);
   const targetRef = useRef(null);
   const heightRef = useRef(false);
@@ -33,7 +33,7 @@ export const Dynamic = ({ DynamicComponent }) => {
       <div ref={targetRef}>
         {showComponent && (
           <React.Suspense fallback={<div>Loading...</div>}>
-            <DynamicComponent />
+            <DynamicComponent {...data} />
           </React.Suspense>
         )}
       </div>
