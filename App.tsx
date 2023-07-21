@@ -29,33 +29,30 @@ const obj = [
 ];
 
 export default function App() {
+  const [counter, setCounter] = React.useState<number>(0);
+
   return (
     <div>
       <h1>Playground!</h1>
       <p>React, Typescript, Error Handling</p>
+
+      <button onClick={() => setCounter(counter + 1)}>
+        increment {counter}
+      </button>
       <ErrorBoundaries>
         <React.Suspense fallback={UserLoadingComponent({ code: 12 })}>
           <UserComponent />
         </React.Suspense>
       </ErrorBoundaries>
 
-      <Dynamic
+      {/* <Dynamic
         DynamicComponent={DynamicComponent}
         data={{
           src: 'https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej-760x400.webp',
         }}
-      />
-      <Dynamic
-        DynamicComponent={DynamicComponent}
-        data={{
-          src: 'https://media.istockphoto.com/id/183276247/photo/parliament-hill-ottawa-canada.jpg?s=612x612&w=0&k=20&c=oORcwvrlFG_GwvRHELWhaXyREex8ouEl_ZSFNBVQtpk=',
-        }}
-      />
-      <Dynamic
-        DynamicComponent={DynamicComponent}
-        data={{
-          src: 'https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg',
-        }}
+      /> */}
+      <UseComponent
+        textProps={counter === 0 ? textA : counter === 1 ? textB : textC}
       />
     </div>
   );

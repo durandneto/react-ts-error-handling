@@ -16,7 +16,6 @@ const countLetters = (text: string): [number, string] => {
     console.log(Char);
     if (Char === last) {
       count++;
-      1;
     } else if (count > largestSequence) {
       largestSequence = count;
       bigSeqChar = last;
@@ -34,12 +33,15 @@ const countLetters = (text: string): [number, string] => {
   return [largestSequence, bigSeqChar];
 };
 
-const UseComponent = ({ textProps, textProps2 = '' }) => {
+const UseComponent = ({ textProps }) => {
   const [counter, setCounter] = React.useState<number>(0);
 
-  const [largestSequence, largestSequenceChar] = countLetters(textProps);
+  const [largestSequence, largestSequenceChar] = React.useMemo(
+    () => countLetters(textProps),
+    [textProps]
+  );
 
-  console.log('render', largestSequence);
+  console.log('render UseComponent', largestSequence);
 
   return (
     <React.Fragment>
@@ -56,4 +58,4 @@ const UseComponent = ({ textProps, textProps2 = '' }) => {
   );
 };
 
-export default UseComponent;
+export default React.memo(UseComponent);
